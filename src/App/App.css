@@ -1,0 +1,29 @@
+.App {
+  text-align: center;
+  margin: 10%;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+}
+
+.blocks {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  padding-top: 10%;
+  column-gap: 2%;
+}
+
+.CompletedList {
+  text-decoration: line-through;
+  color: rgba(255, 0, 0, 0.404);
+}
+
+.ListBox {
+  border: 1px solid black;
+}
+
+.ToComplete {
+  color: blue;
+}
