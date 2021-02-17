@@ -1,7 +1,9 @@
 import { Component } from "react";
 
 export default class TodoAdd extends Component {
-  state = { task: "" };
+  state = {
+    task: "",
+  };
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -16,15 +18,17 @@ export default class TodoAdd extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form className="FormAlign" onSubmit={this.handleSubmit}>
         <input
           type="text"
           placeholder="Add Task"
           value={this.state.task}
           onChange={this.handleChange}
+          className="TaskPlaceholder"
         />
-
-        <button type="submit">Add</button>
+        <button className="AddButton buttonColor" type="submit">
+          Add
+        </button>
       </form>
     );
   }

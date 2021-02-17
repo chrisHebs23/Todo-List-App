@@ -1,6 +1,11 @@
 import MakeList from "../MakeList/MakeList";
 
 export default function CompletedList(props) {
+  let title = "Task Completed";
+  if (props.task.length > 1) {
+    title = "Tasks Completed";
+  }
+
   const todos = props.task.map((todo) => {
     return (
       <MakeList
@@ -13,7 +18,7 @@ export default function CompletedList(props) {
   });
   return (
     <div className="ListBox">
-      <h2>Completed</h2>
+      <h2>{title}</h2>
       <ul className="list CompletedList">{todos}</ul>
     </div>
   );

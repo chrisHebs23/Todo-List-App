@@ -1,7 +1,8 @@
 export default function CompleteList(props) {
   return (
     <li
-      id={props.id}
+      className="hoverChange"
+      id={props.todoId}
       onClick={() => {
         props.onDelete(props.content);
       }}

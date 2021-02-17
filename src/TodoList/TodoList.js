@@ -2,51 +2,66 @@ import React, { Component } from "react";
 import ToCompleteList from "../ToCompleteList/ToCompleteList";
 import CompletedList from "../CompletedList/CompletedList";
 import TodoAdd from "../TodoAdd/TodoAdd";
+import Progress from "../Progress/Progress";
+import ResetButton from "../ResetButton/ResetButton";
 
 export default class TodoList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      todoTest: ["Make bed", "Make kick Ass Projects"],
-      completedTest: ["Sleep ", "Eat", "Shower"],
+      todoTasks: [],
+      completedTasks: [],
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
   }
 
   handleSubmit = (task) => {
-    this.setState({ todoTest: [...this.state.todoTest, task] });
+    this.setState({
+      todoTasks: [...this.state.todoTasks, task],
+    });
   };
 
-  handleDelete = (content) => {
-    const todoTest = this.state.todoTest;
-    const completedTest = this.state.completedTest;
+  handleDelete = (todoId) => {
+    const todoTasks = this.state.todoTasks;
+    const completedTasks = this.state.completedTasks;
 
-    if (todoTest.find((x) => x === content)) {
-      this.setState({ completedTest: [...completedTest, content] });
-      this.setState({ todoTest: todoTest.filter((e) => e !== content) });
-    } else if (completedTest.find((x) => x === content)) {
-      this.setState({ todoTest: [...todoTest, content] });
+    if (todoTasks.find((x) => x === todoId)) {
+      this.setState({ completedTasks: [...completedTasks, todoId] });
+      this.setState({ todoTasks: todoTasks.filter((e) => e !== todoId) });
+    } else if (completedTasks.find((x) => x === todoId)) {
+      this.setState({ todoTasks: [...todoTasks, todoId] });
       this.setState({
-        completedTest: completedTest.filter((e) => e !== content),
+        completedTasks: completedTasks.filter((e) => e !== todoId),
       });
     }
+  };
+
+  handleReset = () => {
+    this.setState({ todoTasks: [] });
+    this.setState({ completedTasks: [] });
   };
 
   render() {
     return (
       <div>
         <TodoAdd onFormSubmit={this.handleSubmit} />
+
         <div className="blocks">
           <ToCompleteList
-            task={this.state.todoTest}
+            task={this.state.todoTasks}
             onDelete={this.handleDelete}
           />
           <CompletedList
-            task={this.state.completedTest}
+            task={this.state.completedTasks}
             onDelete={this.handleDelete}
           />
         </div>
+        <Progress
+          todo={this.state.todoTasks}
+          complete={this.state.completedTasks}
+        />
+        <ResetButton onClick={this.handleReset} />
       </div>
     );
   }

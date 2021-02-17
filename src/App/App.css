@@ -1,6 +1,50 @@
 .App {
   text-align: center;
-  margin: 10%;
+  margin: 5%;
+  color: #fff;
+}
+
+.AppContainer {
+  margin: 5%;
+}
+
+h3 {
+  margin: 0;
+  position: relative;
+}
+
+.FormAlign {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  margin: 2% auto;
+  padding: 5%;
+  position: relative;
+}
+
+.TaskPlaceholder::placeholder {
+  text-align: center;
+}
+.buttonDiv {
+  width: 100%;
+}
+
+.AddButton {
+  width: 25%;
+  margin: 15% 5% 5% 20%;
+  position: absolute;
+}
+
+.buttonColor {
+  border: 0.1rem solid #fff;
+  background-color: #85cdca;
+  box-shadow: none;
+  color: white;
+  box-sizing: content-box;
+}
+
+.buttonColor:hover {
+  border: 0.17rem inset #c34d9d;
 }
 
 .list {
@@ -10,20 +54,51 @@
 
 .blocks {
   display: grid;
-  grid-template-columns: 50% 50%;
-  padding-top: 10%;
-  column-gap: 2%;
+  grid-template-columns: 48.5% 48.5%;
+  margin-top: 5%;
+  column-gap: 3%;
+  position: fixe;
+}
+
+.ListBox {
+  border: 1px solid #fff;
+  background-color: #e27d5f;
+  margin: 0;
+  width: 100%;
+}
+
+.list {
+  padding: 0;
+  margin: 0 10%;
+  font-size: 1rem;
 }
 
 .CompletedList {
   text-decoration: line-through;
-  color: rgba(255, 0, 0, 0.404);
 }
 
-.ListBox {
-  border: 1px solid black;
+.hoverChange:hover {
+  color: #c34d9d;
+  font-size: 1rem;
+  text-decoration: line-through;
 }
 
-.ToComplete {
-  color: blue;
+.progressBar {
+  width: 50%;
+  border: 1px solid #fff;
+  background-color: #85cdca;
+  margin: 3% auto;
+}
+
+.displayProgress {
+  background-color: #e8a87c;
+  white-space: nowrap;
+}
+
+.ButtonContainer {
+  margin: 5% auto;
+}
+
+.resetButton {
+  width: 10%;
 }
