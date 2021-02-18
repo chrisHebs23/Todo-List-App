@@ -1,19 +1,28 @@
 import { Component } from "react";
 
 export default class TodoAdd extends Component {
-  state = {
-    task: "",
-  };
+  constructor(props) {
+    super(props);
+    this.state = { id: `${Date.now()}`, task: "" };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
 
   handleSubmit = (e) => {
+    let { id, task } = this.state;
     e.preventDefault();
     if (this.state.task === "") return;
-    this.props.onFormSubmit(this.state.task);
-    this.setState({ task: "" });
+    this.props.onFormSubmit(id, task);
+    this.setState({ id: `${Date.now()}`, task: "" });
   };
 
   handleChange = (e) => {
-    this.setState({ task: e.target.value });
+    // let stateCopy = Object.assign({}, this.state);
+    // stateCopy.tasks[0].task = e.target.value;
+    // this.setState(stateCopy);
+    let value = e.target.value;
+    this.setState({ task: value });
   };
 
   render() {
@@ -21,7 +30,7 @@ export default class TodoAdd extends Component {
       <form className="FormAlign" onSubmit={this.handleSubmit}>
         <input
           type="text"
-          placeholder="Add Task"
+          placeholder={"Add Task"}
           value={this.state.task}
           onChange={this.handleChange}
           className="TaskPlaceholder"

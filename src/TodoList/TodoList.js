@@ -5,6 +5,8 @@ import TodoAdd from "../TodoAdd/TodoAdd";
 import Progress from "../Progress/Progress";
 import ResetButton from "../ResetButton/ResetButton";
 
+let position;
+
 export default class TodoList extends Component {
   constructor(props) {
     super(props);
@@ -13,26 +15,42 @@ export default class TodoList extends Component {
       completedTasks: [],
     };
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
+    this.handleDeleteTodo = this.handleDeleteTodo.bind(this);
+    this.handleDeleteComplete = this.handleDeleteComplete.bind(this);
   }
 
-  handleSubmit = (task) => {
+  handleSubmit = (id, task) => {
     this.setState({
-      todoTasks: [...this.state.todoTasks, task],
+      todoTasks: [...this.state.todoTasks, { id: id, task: task }],
     });
   };
 
-  handleDelete = (todoId) => {
+  handleDeleteTodo = (todoId) => {
     const todoTasks = this.state.todoTasks;
     const completedTasks = this.state.completedTasks;
 
-    if (todoTasks.find((x) => x === todoId)) {
-      this.setState({ completedTasks: [...completedTasks, todoId] });
-      this.setState({ todoTasks: todoTasks.filter((e) => e !== todoId) });
-    } else if (completedTasks.find((x) => x === todoId)) {
-      this.setState({ todoTasks: [...todoTasks, todoId] });
+    let index = todoTasks.findIndex((item) => item.id === todoId);
+    if ((index) => 0) {
       this.setState({
-        completedTasks: completedTasks.filter((e) => e !== todoId),
+        completedTasks: [...completedTasks, todoTasks[index]],
+      });
+      this.setState({
+        todoTasks: todoTasks.filter((e) => e.id !== todoId),
+      });
+    }
+  };
+
+  handleDeleteComplete = (todoId) => {
+    const todoTasks = this.state.todoTasks;
+    const completedTasks = this.state.completedTasks;
+
+    let index = completedTasks.findIndex((item) => item.id === todoId);
+    if ((index) => 0) {
+      this.setState({
+        todoTasks: [...todoTasks, completedTasks[index]],
+      });
+      this.setState({
+        completedTasks: completedTasks.filter((e) => e.id !== todoId),
       });
     }
   };
@@ -49,12 +67,12 @@ export default class TodoList extends Component {
 
         <div className="blocks">
           <ToCompleteList
-            task={this.state.todoTasks}
-            onDelete={this.handleDelete}
+            tasks={this.state.todoTasks}
+            onDelete={this.handleDeleteTodo}
           />
           <CompletedList
-            task={this.state.completedTasks}
-            onDelete={this.handleDelete}
+            tasks={this.state.completedTasks}
+            onDelete={this.handleDeleteComplete}
           />
         </div>
         <Progress
